@@ -1,28 +1,28 @@
 {
   "name": "grunt-qunit-cov",
-  "description": "Grunt plugin for qunit unit test with coverage",
-  "version": "0.2.4",
-  "homepage": "https://github.com/afonsof/grunt-qunit-cov",
+  "description": "Grunt plugin for qunit unit test with coverage and create jstestdriver report",
+  "version": "0.0.1",
+  "homepage": "https://github.com/dovchar/grunt-qunit-sonar",
   "author": {
     "name": "Dmytro Ovcharenko",
     "email": "o.snich@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/afonsof/grunt-qunit-cov.git"
+    "url": "git://github.com/dovchar/grunt-qunit-sonar.git"
   },
   "bugs": {
-    "url": "https://github.com/afonsof/grunt-qunit-cov/issues"
+    "url": "https://github.com/dovchar/grunt-qunit-sonar/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/afonsof/grunt-qunit-cov/blob/master/MIT-LICENSE"
+      "url": "https://github.com/dovchar/grunt-qunit-sonar/blob/master/MIT-LICENSE"
     }
   ],
-  "main": "tasks/grunt-qunit-cov",
+  "main": "tasks/grunt-qunit-sonar",
   "engines": {
-    "node": ">=0.6.0"
+    "node": ">=0.8.0"
   },
   "scripts": {
     "test": "grunt test"
@@ -36,14 +36,6 @@
     "gruntplugin"
   ],
   "readme": "ERROR: No README.md file found!",
-  "_id": "grunt-qunit-cov@0.2.4",
-  "_from": "grunt-qunit-cov",
-  "optionalDependencies": {},
-  "_engineSupported": true,
-  "_npmVersion": "1.1.9",
-  "_nodeVersion": "v0.8.16",
-  "_defaultsLoaded": true,
-  "dist": {
-    "shasum": "e1c62863db3a034bbaf27362575907d10b844b93"
-  }
+  "_id": "grunt-qunit-sonar@0.0.1",
+  "_from": "grunt-qunit-sonar"
 }
