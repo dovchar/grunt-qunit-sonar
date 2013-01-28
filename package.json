@@ -1,0 +1,49 @@
+{
+  "name": "grunt-qunit-cov",
+  "description": "Grunt plugin for qunit unit test with coverage",
+  "version": "0.2.4",
+  "homepage": "https://github.com/afonsof/grunt-qunit-cov",
+  "author": {
+    "name": "Dmytro Ovcharenko",
+    "email": "o.snich@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/afonsof/grunt-qunit-cov.git"
+  },
+  "bugs": {
+    "url": "https://github.com/afonsof/grunt-qunit-cov/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/afonsof/grunt-qunit-cov/blob/master/MIT-LICENSE"
+    }
+  ],
+  "main": "tasks/grunt-qunit-cov",
+  "engines": {
+    "node": ">=0.6.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "grunt": "~0.3.4",
+    "wrench": "~1.4.0"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "gruntplugin"
+  ],
+  "readme": "ERROR: No README.md file found!",
+  "_id": "grunt-qunit-cov@0.2.4",
+  "_from": "grunt-qunit-cov",
+  "optionalDependencies": {},
+  "_engineSupported": true,
+  "_npmVersion": "1.1.9",
+  "_nodeVersion": "v0.8.16",
+  "_defaultsLoaded": true,
+  "dist": {
+    "shasum": "e1c62863db3a034bbaf27362575907d10b844b93"
+  }
+}
