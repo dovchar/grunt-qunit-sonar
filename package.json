@@ -1,7 +1,7 @@
 {
   "name": "grunt-qunit-sonar",
   "description": "Grunt plugin for qunit unit test with coverage and create jstestdriver report",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/dovchar/grunt-qunit-sonar",
   "author": {
     "name": "Dmytro Ovcharenko",
