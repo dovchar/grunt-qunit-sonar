@@ -106,7 +106,7 @@ module.exports = function(grunt)
         done: function(failed, passed, total, duration, coverage)
         {
             var coverageOutputFile = outDir + '/TEST-projects-Gryphon-tools-grunt.xml';
-            // var coverageBase = grunt.file.read(grunt.task.getFile('qunit-cov/xml.tmpl')).toString();
+            // var coverageBase = grunt.file.read(grunt.task.getFile('qunit-sonar/xml.tmpl')).toString();
             this.testResultXML = this.testResultXML.replace('undefined', '');
             var xmlReport = '<testsuite name="undefined" errors="0" failures="'+failed+'" tests="'+total+'" time="0.030">\n'+this.testResultXML+
                             '</testsuite>';            
@@ -180,7 +180,7 @@ module.exports = function(grunt)
     // TASKS
     // ==========================================================================
 
-    grunt.registerMultiTask('qunit-cov', 'Run QUnit unit tests in a headless PhantomJS instance.', function()
+    grunt.registerMultiTask('qunit-sonar', 'Run QUnit unit tests in a headless PhantomJS instance.', function()
     {
         // This task is asynchronous.
         var done = this.async();
@@ -311,11 +311,11 @@ module.exports = function(grunt)
                     {
                         code: 90,
                         args: [
-                                grunt.task.getFile('qunit-cov/phantom.js'),
+                                grunt.task.getFile('qunit-sonar/phantom.js'),
                                 tempfile,
-                                grunt.task.getFile('qunit-cov/qunit.js'),
+                                grunt.task.getFile('qunit-sonar/qunit.js'),
                                 url,
-                                '--config=' + grunt.task.getFile('qunit-cov/phantom.json')
+                                '--config=' + grunt.task.getFile('qunit-sonar/phantom.json')
                             ],
                         done: function(err)
                         {
@@ -438,7 +438,7 @@ module.exports = function(grunt)
 
         //console.log(coverageInfo)
         var totalCovered = 0, totalUncovered = 0;
-        var coverageBase = grunt.file.read(grunt.task.getFile('qunit-cov/cov.tmpl')).toString();
+        var coverageBase = grunt.file.read(grunt.task.getFile('qunit-sonar/cov.tmpl')).toString();
         
         var filesCoverage = {};        
         

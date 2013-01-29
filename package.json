@@ -1,5 +1,5 @@
 {
-  "name": "grunt-qunit-cov",
+  "name": "grunt-qunit-sonar",
   "description": "Grunt plugin for qunit unit test with coverage and create jstestdriver report",
   "version": "0.0.1",
   "homepage": "https://github.com/dovchar/grunt-qunit-sonar",
@@ -24,9 +24,6 @@
   "engines": {
     "node": ">=0.8.0"
   },
-  "scripts": {
-    "test": "grunt test"
-  },
   "dependencies": {
     "grunt": "~0.3.4",
     "wrench": "~1.4.0"
@@ -35,7 +32,6 @@
   "keywords": [
     "gruntplugin"
   ],
-  "readme": "ERROR: No README.md file found!",
   "_id": "grunt-qunit-sonar@0.0.1",
   "_from": "grunt-qunit-sonar"
 }

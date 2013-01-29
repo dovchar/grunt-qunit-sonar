@@ -1,4 +1,4 @@
-# grunt-qunit-cov
+# grunt-qunit-sonar
 
 [Grunt](https://github.com/gruntjs/grunt) plugin for qunit unit test with coverage
 
@@ -9,7 +9,7 @@ This plugin has two external dependencies, both must be downloaded, extracted an
 1. [PhantomJs](http://phantomjs.org/download.html)
 2. [JsCoverage](http://siliconforks.com/jscoverage/download.html)
 
-Install the module with: `npm install grunt-unit-cov`
+Install the module with: `npm install grunt-unit-sonar`
 
 Then load it from your own `grunt.js` file:
 
