@@ -19,6 +19,18 @@ grunt.loadNpmTasks('grunt-qunit-sonar');
 
 ## Documentation
 
+'qunit-sonar': {
+      mysubtask: {
+		    "minimum": 0.01, //min coverage; 80% default
+		    "srcDir": "src", //your source here 
+		    "depDirs": ["tests","libs"], //your depended files
+		    "outDir": "test_results", //where you want save reports (LCov and xml)
+		    "testFiles": "tests/TestsChart.html" // html file where you include unit tests
+		}
+    }
+
+ grunt.registerTask('default', 'qunit-sonar');
+
 ## Contributing
 
 Please use the issue tracker and pull requests.
