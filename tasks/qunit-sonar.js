@@ -72,7 +72,7 @@ module.exports = function(grunt) {
         },
 
         testDone: function(name, failed, passed, total) {
-            this.testResultXML += '<testcase classname="Chrome_240131252_Windows.Default Module" name="test '+ name +'" time="0.0030"/>\n';
+            this.testResultXML += '<testcase classname="Pantomjs_Windows.'+ this.currentModule +'" name="test '+ name +'"/>\n';
             // Log errors if necessary, otherwise success.
             if (failed > 0) {
                 // list assertions
@@ -92,9 +92,10 @@ module.exports = function(grunt) {
             
             this.testResultXML = this.testResultXML.replace('undefined', '');
             var xmlReport = '<testsuite name="undefined" errors="0" failures="'+failed+
-                            '" tests="'+total+'" time="0.030">\n'+this.testResultXML+
-                            '</testsuite>';            
-            
+                            '" tests="'+total+'" time="'+ duration/1000 +'">\n'+this.testResultXML+
+                            '</testsuite>';
+                                        
+            this.testResultXML = '';
             grunt.file.write(coverageOutputFile, xmlReport);
             
             status.failed += failed;
