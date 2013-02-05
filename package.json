@@ -3,10 +3,7 @@
   "description": "Grunt plugin for qunit unit test with coverage and create jstestdriver report",
   "version": "0.0.3",
   "homepage": "https://github.com/dovchar/grunt-qunit-sonar",
-  "author": {
-    "name": "Dmytro Ovcharenko",
-    "email": "o.snich@gmail.com"
-  },
+  "author": "Dmytro Ovcharenko <o.snich@gmail.com>",
   "repository": {
     "type": "git",
     "url": "git://github.com/dovchar/grunt-qunit-sonar.git"
@@ -25,7 +22,7 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "test":"mocha"
+    "test": "mocha"
   },
   "dependencies": {
     "grunt": "~0.3.4",
@@ -37,6 +34,9 @@
   "keywords": [
     "gruntplugin"
   ],
-  "_id": "grunt-qunit-sonar@0.0.3",
-  "_from": "grunt-qunit-sonar"
+  "_from": "grunt-qunit-sonar",
+  "directories": {
+    "test": "test"
+  },
+  "license": "BSD"
 }
