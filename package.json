@@ -34,7 +34,6 @@
   "keywords": [
     "gruntplugin"
   ],
-  "_from": "grunt-qunit-sonar",
   "directories": {
     "test": "test"
   },
