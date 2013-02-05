@@ -444,9 +444,6 @@ module.exports = function(grunt) {
             for (var idx=0; idx < fileLines.length; idx++) {
                 if(lineCoverage) {
                     var cvg = lineCoverage[idx + 1];
-                    if (isNaN(cvg)) {
-                        cvg = 0;
-                    }
                     if (typeof cvg === 'number') {
                         if( cvg > 0 ) {
                             out += 'DA:' + idx + ',' + cvg + '\n';
