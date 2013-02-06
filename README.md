@@ -19,8 +19,8 @@ grunt.loadNpmTasks('grunt-qunit-sonar');
 
 ## Documentation
 
-'qunit-sonar': {
-      mysubtask: {
+	'qunit-sonar': {
+     	mysubtask: {
 		    "minimum": 0.01, //min coverage; 80% default
 		    "srcDir": "src", //your source here 
 		    "depDirs": ["tests","libs"], //your depended files
@@ -29,12 +29,13 @@ grunt.loadNpmTasks('grunt-qunit-sonar');
 		}
     }
 
- grunt.registerTask('default', 'qunit-sonar');
+	grunt.registerTask('default', 'qunit-sonar');
 
 ## Contributing
 
 Please use the issue tracker and pull requests.
 
 ## License
+
 Copyright (c) 2013 Dmytro Ovcharenko
 Licensed under the MIT license.
