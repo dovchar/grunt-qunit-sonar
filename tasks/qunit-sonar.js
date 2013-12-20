@@ -29,7 +29,7 @@ module.exports = function(grunt) {
     function logFailedAssertions() {
         var assertion;
         // Print each assertion error.
-        while (assertion = failedAssertions.shift()) {
+        while (assertion === failedAssertions.shift()) {
             grunt.verbose.or.error(assertion.testName);
             grunt.log.error('Message: ' + formatMessage(assertion.message));
             if (assertion.actual !== assertion.expected) {
@@ -53,7 +53,7 @@ module.exports = function(grunt) {
             currentModule = name;
         },
 
-        moduleDone: function(name, failed, passed, total) {
+        moduleDone: function(name) {
             delete unfinished[name];
         },
 
@@ -71,7 +71,7 @@ module.exports = function(grunt) {
             grunt.verbose.write(currentTest + '...');
         },
 
-        testDone: function(name, failed, passed, total) {
+        testDone: function(name, failed) {
             this.testResultXML += '<testcase classname="Pantomjs_Windows.'+ this.currentModule +'" name="test '+ name +'"/>\n';
             // Log errors if necessary, otherwise success.
             if (failed > 0) {
@@ -151,17 +151,15 @@ module.exports = function(grunt) {
 
     grunt.registerMultiTask('qunit-sonar', 'Run QUnit unit tests in a headless PhantomJS instance.', function() {
         // This task is asynchronous.
-        var done = this.async();
-
-        minimum = this.data.minimum ? this.data.minimum : 0.8;
-        srcDir = this.data.srcDir;
-        srcOriginal = this.data.srcOriginal;
-        outDir = this.data.outDir;
-        depDirs = this.data.depDirs;
-        testFiles = this.data.testFiles;
-        baseDir = this.data.baseDir;
-        // Reset status.
+        var done = this.async(), 
+            minimum = this.data.minimum ? this.data.minimum : 0.8,
+            srcDir = this.data.srcDir,
+            depDirs = this.data.depDirs,
+            testFiles = this.data.testFiles,
+            baseDir = this.data.baseDir;
         
+        outDir = this.data.outDir;
+
         if(fs.existsSync(outDir)) {
             wrench.rmdirSyncRecursive(outDir);
         }
@@ -190,7 +188,7 @@ module.exports = function(grunt) {
                     srcDir,
                     outDir + '/in/' + srcDir
                 ],
-            done: function(err) {
+            done: function() {
                 grunt.log.ok();
                
                 // Get files as URLs.
@@ -277,7 +275,7 @@ module.exports = function(grunt) {
                     });
                 },
             
-                function(err) {
+                function () {
                     // All tests have been run.
                     var content = JSON.stringify(status);
                     var coverageOutputFile = outDir + '/in/Chart/jscoverage.json';
@@ -384,17 +382,17 @@ module.exports = function(grunt) {
                 covered = 0, 
                 uncovered = 0, 
                 lineCoverage = coverageInfo[relativeFile], 
-                fileLines = grunt.file.read(file).split(/\r?\n/);;
+                fileLines = grunt.file.read(file).split(/\r?\n/);
             
             grunt.log.writeln('reading ' + file);
             
             out += 'SF:' + path.resolve('', file) + '\n';
 
             for (var idx=0; idx < fileLines.length; idx++) {
-                var hitmiss = ' nottested', cvg, htmlLine;
+                var hitmiss = ' nottested';
                 if(lineCoverage) {
                     //+1: coverage lines count from 1.
-                    cvg = lineCoverage[idx + 1];
+                    var cvg = lineCoverage[idx + 1];
                     
                     hitmiss = '';
                     if (typeof cvg === 'number') {
@@ -412,7 +410,7 @@ module.exports = function(grunt) {
                     }
                 }
 
-                htmlLine = fileLines[idx].replace('<', '&lt;').replace('>', '&gt;');
+                var htmlLine = fileLines[idx].replace('<', '&lt;').replace('>', '&gt;');
                 colorized += '<div class="code' + hitmiss + '">' + htmlLine + '</div>\n';
                 
                 filesCoverage[relativeFile] = { covered: covered, uncovered: uncovered };
@@ -453,7 +451,7 @@ module.exports = function(grunt) {
         for(var key in filesCoverage) {
             var fileCoverage = filesCoverage[key];
             
-            if(fileCoverage.covered == 0 && fileCoverage.uncovered == 0) {
+            if(fileCoverage.covered === 0 && fileCoverage.uncovered === 0) {
                 uncovHtml+= printCoverageLine(key, fileCoverage.covered, fileCoverage.uncovered);
             } else {
                 covHtml+= printCoverageLine(key, fileCoverage.covered, fileCoverage.uncovered);
@@ -477,7 +475,7 @@ module.exports = function(grunt) {
         if(!doNotShowLink) {
             link = '<a href="' + file + '.html">' + file +'</a>';
         }
-        if( covered == 0 && uncovered == 0 ) {
+        if( covered === 0 && uncovered === 0 ) {
             return '<tr><td width="150" bgcolor="#990000"></td><td width="right" align="left"><strong>0%</strong></td><td>' + link +'</td></tr>';
         }
         return '<tr><td width="150"><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="' + percent + 
@@ -485,4 +483,4 @@ module.exports = function(grunt) {
                     '%" bgcolor="#990000"></td></tr></tbody></table></td><td width="25" align="right"><strong>' + percent+ 
                     '%</strong></td><td>' + link + '</td></tr>';
     }
-}
+};
