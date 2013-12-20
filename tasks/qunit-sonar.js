@@ -372,35 +372,39 @@ module.exports = function(grunt) {
         
         var files = grunt.file.expandFiles(srcDir + '/**/*.js');
 
-        var filesOriginal = grunt.file.expandFiles(srcOriginal + '/**/*.js');
+         // code for original files
+        var out = '';
+        var coverageOut = outDir + '/jsTestDriver.conf-coverage.dat';
+        var end_string = '';
             
-        for(var i=0; i < files.length; i++) {
-            var file = files[i];
-
-            var relativeFile = file.substr(srcDir.length + 1);
+        for(var i = 0; i < files.length; i++) {
+            var file = files[i], 
+                relativeFile = file.substr(srcDir.length + 1), 
+                colorized = '',
+                covered = 0, 
+                uncovered = 0, 
+                lineCoverage = coverageInfo[relativeFile], 
+                fileLines = grunt.file.read(file).split(/\r?\n/);;
             
             grunt.log.writeln('reading ' + file);
             
-            var colorized = '';
-            var covered = 0;
-            var uncovered = 0;
-            var lineCoverage = coverageInfo[relativeFile];
-
-            var fileLines = grunt.file.read(file).split(/\r?\n/);
+            out += 'SF:' + path.resolve('', file) + '\n';
 
             for (var idx=0; idx < fileLines.length; idx++) {
-                var hitmiss = ' nottested';
+                var hitmiss = ' nottested', cvg, htmlLine;
                 if(lineCoverage) {
                     //+1: coverage lines count from 1.
-                    var cvg = lineCoverage[idx + 1];
+                    cvg = lineCoverage[idx + 1];
                     
-                    var hitmiss = '';
+                    hitmiss = '';
                     if (typeof cvg === 'number') {
                         if( cvg > 0 ) {
                             hitmiss = ' hit';
+                            out += 'DA:' + idx + ',' + cvg + '\n';
                             covered++;
                         } else {
                             hitmiss = ' miss';
+                            out += 'DA:' + idx + ',' + cvg + '\n';
                             uncovered++;
                         }
                     } else {
@@ -408,11 +412,14 @@ module.exports = function(grunt) {
                     }
                 }
 
-                var htmlLine = fileLines[idx].replace('<', '&lt;').replace('>', '&gt;');
+                htmlLine = fileLines[idx].replace('<', '&lt;').replace('>', '&gt;');
                 colorized += '<div class="code' + hitmiss + '">' + htmlLine + '</div>\n';
                 
                 filesCoverage[relativeFile] = { covered: covered, uncovered: uncovered };
             }
+
+            end_string = (files.length - i > 1) ? '\n' : ''; 
+            out += 'end_of_record' + end_string;   
 
             grunt.log.writeln(covered + " - " + uncovered);
             
@@ -428,40 +435,6 @@ module.exports = function(grunt) {
             }
         }
 
-        // code for original files
-        var out = '';
-        var coverageOut = outDir + '/jsTestDriver.conf-coverage.dat';
-        var end_string = '';
-
-        for(var i=0; i < filesOriginal.length; i++) {
-            var fileOriginal = filesOriginal[i];
-            var fileLines = grunt.file.read(fileOriginal).split(/\r?\n/);
-            var relativeFile = fileOriginal.substr(srcOriginal.length + 1);
-            var lineCoverage = coverageInfo[relativeFile];
-
-            out += 'SF:' + path.resolve('', fileOriginal) + '\n';
-
-            for (var idx=0; idx < fileLines.length; idx++) {
-                if(lineCoverage) {
-                    var cvg = lineCoverage[idx + 1];
-                    if (isNaN(cvg)) {
-                        cvg = 0;
-                    }
-                    if (typeof cvg === 'number') {
-                        if( cvg > 0 ) {
-                            out += 'DA:' + idx + ',' + cvg + '\n';
-                        }
-                        else {
-                            out += 'DA:' + idx + ',' + cvg + '\n';
-                        }
-                    }
-                }
-
-            }
-
-            end_string = (filesOriginal.length - i > 1) ? '\n' : ''; 
-            out += 'end_of_record' + end_string;   
-        }
         grunt.file.write(coverageOut, out);
 
         // code for original files
