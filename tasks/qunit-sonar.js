@@ -8,16 +8,14 @@
  */
 
  // Nodejs libs.
-var fs = require('fs');
-var path = require('path');
-var wrench = require('wrench');
+var fs = require('fs'),
+  path = require('path'),
+  wrench = require('wrench');
 
 module.exports = function(grunt) {
-    var status = {failed: 0, passed: 0, total: 0, duration: 0, coverage: {}};
-    // Keep track of the last-started module, test and status.
-    var currentModule, currentTest;
-    // Keep track of the last-started test(s).
-    var unfinished = {};
+    var status = {failed: 0, passed: 0, total: 0, duration: 0, coverage: {}},
+    currentModule, currentTest,
+    unfinished = {};
 
     // Allow an error message to retain its color when split across multiple lines.
     function formatMessage(str) {
@@ -72,7 +70,7 @@ module.exports = function(grunt) {
         },
 
         testDone: function(name, failed) {
-            this.testResultXML += '<testcase classname="Pantomjs_Windows.'+ this.currentModule +'" name="test '+ name +'"/>\n';
+            this.testResultXML += '<testcase classname="Pantomjs_.'+ this.currentModule +'" name="test '+ name +'"/>\n';
             // Log errors if necessary, otherwise success.
             if (failed > 0) {
                 // list assertions
@@ -88,7 +86,7 @@ module.exports = function(grunt) {
         },
         
         done: function(failed, passed, total, duration, coverage) {
-            var coverageOutputFile = outDir + '/TEST-projects-Gryphon-tools-grunt.xml';
+            var coverageOutputFile = outDir + '/TEST-projects-tools-grunt.xml';
             
             this.testResultXML = this.testResultXML.replace('undefined', '');
             var xmlReport = '<testsuite name="undefined" errors="0" failures="'+failed+
