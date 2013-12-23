@@ -154,7 +154,7 @@ grunt.loadNpmTasks('grunt-qunit-sonar');
 
     </project>
     ```
-4. So now we should send generated reports (jsTestDriver.conf-coverage.dat, TEST-projects-Gryphon-tools-grunt.xml) to sonar qube. 
+4. So now we should send generated reports (jsTestDriver.conf-coverage.dat, TEST-projects-tools-grunt.xml) to sonar qube. 
     We will use maven for this (http://maven.apache.org/download.cgi). If you use sonar v3.6+ you can use maven Maven 3.1+. If your sonar version less than v3.6 I would recomend to use Maven 3.0.5.
 
     Example:
