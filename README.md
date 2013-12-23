@@ -31,6 +31,41 @@ grunt.loadNpmTasks('grunt-qunit-sonar');
 
 	grunt.registerTask('default', 'qunit-sonar');
 
+## How it works
+
+1. Run qunit-sonar task from from directory where you store Gruntfile.js:
+
+```js
+grunt qunit-sonar
+
+//or just grunt if qunit-sonar is a default task
+
+grunt
+```
+
+2. In your outDir directory you should see something like this:
+
+```js
+|-outDir
+|--
+|	|--in
+|	|--out
+|	jsTestDriver.conf-coverage.dat
+|	TEST-projects-Gryphon-tools-grunt.xml
+|
+```
+
+3. Create pom file for sonar.
+
+4. So now we should send generated reports (jsTestDriver.conf-coverage.dat, TEST-projects-Gryphon-tools-grunt.xml) to sonar qube. 
+We will use maven for this (http://maven.apache.org/download.cgi). If you use sonar v3.6+ you can use maven Maven 3.1+. If your sonar version less than v3.6 I would recomend to use Maven 3.0.5.
+
+Example:
+
+```js
+mvn -X -f "PATH_TO_YOUR_POM_FILE/js_pom.xml" sonar:sonar
+```
+
 ## Contributing
 
 Please use the issue tracker and pull requests.
