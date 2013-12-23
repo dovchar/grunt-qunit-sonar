@@ -1,29 +1,18 @@
-/*
- * grunt
- * https://github.com/cowboy/grunt
- *
- * Copyright (c) 2012 "Cowboy" Ben Alman
- * Licensed under the MIT license.
- * http://benalman.com/about/license/
- */
-
- // Nodejs libs.
+// Nodejs libs.
 var fs = require('fs'),
   path = require('path'),
   wrench = require('wrench');
 
 module.exports = function(grunt) {
     var status = {failed: 0, passed: 0, total: 0, duration: 0, coverage: {}},
-    currentModule, currentTest,
-    unfinished = {};
+    currentModule, currentTest, unfinished = {}, 
+    failedAssertions = [];
 
     // Allow an error message to retain its color when split across multiple lines.
     function formatMessage(str) {
         return String(str).split('\n').map(function(s) { return s.magenta; }).join('\n');
     }
 
-    // Keep track of failed assertions for pretty-printing.
-    var failedAssertions = [];
     function logFailedAssertions() {
         var assertion;
         // Print each assertion error.
@@ -142,10 +131,6 @@ module.exports = function(grunt) {
         // Debugging messages.
         debug: grunt.log.debug.bind(grunt.log, 'phantomjs')
     };
-
-    // ==========================================================================
-    // TASKS
-    // ==========================================================================
 
     grunt.registerMultiTask('qunit-sonar', 'Run QUnit unit tests in a headless PhantomJS instance.', function() {
         // This task is asynchronous.
@@ -296,12 +281,7 @@ module.exports = function(grunt) {
         });
     });
 
-    // ==========================================================================
-    // HELPERS
-    // ==========================================================================
-
-    grunt.registerHelper('phantomjs', function(options)
-    {
+    grunt.registerHelper('phantomjs', function (options) {
         return grunt.utils.spawn({
             cmd: 'phantomjs',
             args: options.args
